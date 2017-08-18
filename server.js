@@ -23,9 +23,11 @@ app.set("view engine", "handlebars");
 // Import routes and give the server access to them.
 var routes = require("./controllers/burgers_controller.js");
 app.use("/", routes);
+app.use("/update", routes);
+app.use("/create", routes);
 
 db.sequelize.sync({ force: true }).then(function() {
 app.listen(port, function() {
-console.log("Listening on port:%s", PORT);
+console.log("Listening on port:%s", port);
  });
 });

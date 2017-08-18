@@ -1,21 +1,22 @@
 var express = require("express");
 var router = express.Router();
-var db = require("../models");
+var db = require("../models/burger");
 
 // get route -> index
 // show all the burger data in the database
-router.get("/api/all", function(req,res){
-  db.burger.findAll().then(function(results){
-    res.json(results);
-  });
+// router.get("/api/all", function(req,res){
+//   db.burger.findAll().then(function(results){
+//     res.json(results);
+//   });
+// });
+//ROUTE FOR THE ROOT FILE /
+router.get("/", function(req, res) {
+    res.redirect("/burgers");
 });
 
-
   router.get("/burgers", function(req, res) {
-  //  console.log(      'in burgers get, findall'
-
-   db.burger.findAll({}).then(function(burgerData) {
-       res.json(burgerData);
+    db.burger.findAll({}).then(function(burgerData) {
+      res.json(burgerData);
     });
   });
 
@@ -41,8 +42,8 @@ router.get("/api/all", function(req,res){
       // wrapper for orm.js that using MySQL update callback will return a log to console,
       // render back to index with handle
     //  console.log(burgerData);
-      res.json("/burgers");
+      res.render("/burgers");
     });
   });
 
-//module.exports = router;
+module.exports = router;
