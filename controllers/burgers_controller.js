@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var db = require("../models/burger");
+var db = require("../models/");
 
 // get route -> index
 // show all the burger data in the database
@@ -11,18 +11,33 @@ var db = require("../models/burger");
 // });
 //ROUTE FOR THE ROOT FILE /
 router.get("/", function(req, res) {
-    res.redirect("/burgers");
-});
-
-  router.get("/burgers", function(req, res) {
-    db.burger.findAll({}).then(function(burgerData) {
-      res.json(burgerData);
+  console.log("hi");
+  //  res.json("/burgers");
+    // db.Burger.findAll({}).then(function(burgerData) {
+    //   console.log(burgerData);
+       res.redirect("/burgers");
+    // });
+  });
+  // router.get("/burgers", function(req, res) {
+  //   console.log(res);
+  //   db.Burger.findAll({}).then(function(burgerData) {
+  //     console.log(burgerData);
+  //     res.render(burgerData);
+  //   });
+  // });
+  router.get("/burgers/create", function(req, res) {
+    // takes the request object using it as input for buger.addBurger
+    db.Burger.create({
+          burger_name: req.body.burger_name,
+          devoured : req.body.devoured
+    }).then(function(burgerData) {
+      res.redirect("/burgers");
     });
   });
 
   router.post("/burgers/create", function(req, res) {
     // takes the request object using it as input for buger.addBurger
-    db.burger.create({
+    db.Burger.create({
           burger_name: req.body.burger_name,
           devoured : req.body.devoured
     }).then(function(burgerData) {
@@ -31,7 +46,7 @@ router.get("/", function(req, res) {
   });
   // put route -> back to index
   router.put("/burgers/update", function(req, res) {
-    db.burger.update({
+    db.Burger.update({
       burger_name: req.body.burger_name,
       devoured: req.body.devoured
     }, {

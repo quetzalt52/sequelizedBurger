@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
- var burger  = sequelize.define("burgers", {
+ var Burger  = sequelize.define("burgers", {
   burger_name: DataTypes.STRING,
      devoured: {
        type: DataTypes.BOOLEAN,
@@ -9,29 +9,11 @@ module.exports = function(sequelize, DataTypes) {
      classMethods: {
        associate: function(models) {
          // associations can be defined here
-         burger.hasOne(models.Temperatures, {
+        burger.hasOne(models.Temperatures, {
 				foreignKey: 'burger_id'
 			});
     }
  }
    });
-   return burger;
+   return Burger;
  };
-
-
-
-
-
-
-
-
-//
-//     burger_name: DataTypes.STRING,
-//     devoured: {
-//       type: DataTypes.BOOLEAN,
-//       defaultValue: false
-//     }
-//
-//   });
-//   return burger;
-// };
