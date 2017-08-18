@@ -2,8 +2,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var path = require("path");
-
-var port = process.env.PORT || 3000;
+// Requiring our models for syncing
+var db = require("./models");
+var port = process.env.PORT || 8080;
 var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
@@ -23,4 +24,8 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/burgers_controller.js");
 app.use("/", routes);
 
-app.listen(port);
+db.sequelize.sync({ force: true }).then(function() {
+app.listen(port, function() {
+console.log("Listening on port:%s", PORT);
+ });
+});

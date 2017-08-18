@@ -45,4 +45,4 @@ router.get("/api/all", function(req,res){
     });
   });
 
-module.exports = router;
+//module.exports = router;
